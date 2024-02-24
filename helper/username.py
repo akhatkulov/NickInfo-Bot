@@ -2,7 +2,7 @@ import threading
 import requests
 import requests as r
 import time
-def nick_fast_checker(a : str):
+async def nick_fast_checker(a : str):
     res =""
     s_n = ['instagram','facebook','twitter','youtube','blogger','reddit','pinterest','github','tumblr','flickr','vimeo','soundcloud',
 'disqus','medium','devianart','vk','about.me','imgur','slideshare','spotify','scribd','badoo','patreon','bitbucket','dailymotion','etsy','cashme',
