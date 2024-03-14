@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 from loader import dp
 from helper.username import nick_fast_checker
-
+import asyncio
 @dp.callback_query_handler(text="uz_name_search")
 async def uz_search(call: CallbackQuery,state: FSMContext):
     await call.message.answer("Foydalanuvchi nomini yuboring")
@@ -14,14 +14,14 @@ async def uz_search(call: CallbackQuery,state: FSMContext):
 
 @dp.callback_query_handler(text="ru_name_search")
 async def uz_search(call: CallbackQuery,state: FSMContext):
-    await call.message.answer("Foydalanuvchi nomini yuboring")
+    await call.message.answer("Отправьте свое имя пользователя")
     await call.answer(cache_time=60)
 
     await state.set_state("ru_search")
 
 @dp.callback_query_handler(text="en_name_search")
 async def uz_search(call: CallbackQuery,state: FSMContext):
-    await call.message.answer("Foydalanuvchi nomini yuboring")
+    await call.message.answer("Sen username for check")
     await call.answer(cache_time=60)
 
     await state.set_state("en_search")
@@ -30,19 +30,19 @@ async def uz_search(call: CallbackQuery,state: FSMContext):
 async def uz_search_2(msg: types.Message,state: FSMContext):
     await msg.answer("Tekshrilmoqda...")
 
-    await msg.answer(nick_fast_checker(msg.text),parse_mode="html")
+    await msg.answer(await nick_fast_checker(msg.text),parse_mode="html")
     await state.finish()
 
 @dp.message_handler(state="ru_search")
 async def uz_search_2(msg: types.Message,state: FSMContext):
-    await msg.answer("Tekshrilmoqda...")
+    await msg.answer("Проверка...")
 
-    await msg.answer(nick_fast_checker(msg.text),parse_mode="HTML")
+    await msg.answer(await nick_fast_checker(msg.text),parse_mode="HTML")
     await state.finish()   
 
 @dp.message_handler(state="en_search")
 async def uz_search_2(msg: types.Message,state: FSMContext):
-    await msg.answer("Tekshrilmoqda...")
+    await msg.answer("Checking...")
 
-    await msg.answer(nick_fast_checker(msg.text),parse_mode="HTML")
+    await msg.answer(await nick_fast_checker(msg.text),parse_mode="HTML")
     await state.finish()
